@@ -13,6 +13,11 @@ public class Player {
         this.hand = hand;
     }
 
+    @Override
+    public String toString() {
+        return "Player{" + "name='" + name + '\'' + ", money=" + money + '}';
+    }
+
     public void addCard(Card card) {
         this.hand.add(card);
     }
@@ -33,6 +38,10 @@ public class Player {
 
     public double getMoney() {
         return money;
+    }
+
+    public void subtractBet(double betAmount) {
+        this.money -= betAmount;
     }
 }
 

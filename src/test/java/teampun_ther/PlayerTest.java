@@ -14,12 +14,14 @@ public class PlayerTest {
     Player player;
     Card card;
     ArrayList<Card> hand;
+    Deck deck = new Deck();
 
     @Before
     public void setUp() {
         player = new Player("Player One", 100);
         card = new Card("10", Suit.CLUB);
         hand = new ArrayList<Card>();
+        deck = new Deck();
 
     }
 
@@ -52,6 +54,16 @@ public class PlayerTest {
         double expected = 100;
         double actual = player.getMoney();
         Assert.assertEquals(expected,actual, 0.001);
+    }
+
+    @Test
+    public void subtractBetTest(){
+        player.money = 1000;
+        player.subtractBet(100);
+        double expected = 900;
+
+        double actual = player.money;
+
     }
 
 
