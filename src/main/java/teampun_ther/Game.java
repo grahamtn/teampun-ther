@@ -2,10 +2,30 @@ package teampun_ther;
 
 import com.sun.org.glassfish.gmbal.GmbalException;
 
+import java.util.Scanner;
+
 public class Game {
-    public static Player player;
-    public static Player dealer;
+    private Player player;
+    private Player dealer;
     private double bet;
+
+    public Game(){
+        this.dealer = new Player("Dealer", 1000);
+        this.player = getGetPlayerInfo();
+    }
+
+    public Player getGetPlayerInfo() {
+        String name = getStringInput("What is your name?");
+        double money = Double.parseDouble(getStringInput("Enter an amount of money you would like to start with."));
+        Player player1 = new Player(name, money);
+        return player1;
+    }
+
+    public static String getStringInput(String input) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(input);
+        return sc.nextLine();
+    }
 
     public Player getPlayer() {
         return player;
@@ -31,21 +51,23 @@ public class Game {
         this.bet = bet;
     }
 
-    public static void main(String[] args) {
-        Game.player = new Player("Player One", 1000);
+    //public String getP()
+
+    public void main(String[] args) {
+        this.player = new Player("Player One", 1000);
         /// Console should do this ^^^^
 
 
-        Game.dealer = new Player("Dealer", 1000000);
+        this.dealer = new Player("Dealer", 1000000);
         Deck gameDeck = new Deck();
         gameDeck.shuffle(gameDeck.getCardsInDeck());
 
 
-        Game.dealOneCard(gameDeck);
-        Game.dealOneCard(gameDeck);
+//        Game.dealOneCard(gameDeck);
+//        Game.dealOneCard(gameDeck);
 
-        Card playerCardOne = Game.player.getHand().get(0);
-        Card playerCardTwo = Game.player.getHand().get(1);
+        Card playerCardOne = this.player.getHand().get(0);
+        Card playerCardTwo = this.player.getHand().get(1);
 
 
 
@@ -53,7 +75,7 @@ public class Game {
                 ", "+ playerCardTwo.getValue()+" of "+playerCardTwo.getSuit()+"s");
 
 
-        Card dealerCardOne = Game.dealer.getHand().get(0);
+        Card dealerCardOne = this.dealer.getHand().get(0);
 
         System.out.println("Dealer top card: "+ dealerCardOne.getValue()+" of "+dealerCardOne.getSuit()+"s");
 
@@ -78,14 +100,21 @@ public class Game {
 
         }
 
-    public static void dealOneCard(Deck gameDeck) {
+    public void dealOneCardForPlayer(Deck gameDeck) {
 
         Card lastCard = gameDeck.getLastCardFromDeck(gameDeck);
-        Game.player.addCard(lastCard);
-        lastCard = gameDeck.getLastCardFromDeck(gameDeck);
-        Game.dealer.addCard(lastCard);
+        this.player.addCard(lastCard);
     }
 
+    public void dealOneCard(Deck gameDeck) {
+
+        Card lastCard = gameDeck.getLastCardFromDeck(gameDeck);
+        this.player.addCard(lastCard);
+
+        lastCard = gameDeck.getLastCardFromDeck(gameDeck);
+        this.dealer.addCard(lastCard);
     }
+
+}
 
 

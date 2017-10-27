@@ -6,6 +6,14 @@ import static org.junit.Assert.*;
 
 public class GameTest {
 
+    @Test
+    public void gameConstructorTest() {
+        Game newGame = new Game();
+
+    }
+
+
+
 //    @Test
 //    public void dealOneCardTest() {
 //        Player playerOne = new Player("Player One", 1000);
